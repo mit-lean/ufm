@@ -1,0 +1,41 @@
+---
+# configuration file for experiment 
+# paths to directories
+dataset: tum
+dataset_seq_path: ../datasets/rgbd_dataset_freiburg2_pioneer_slam3/
+output_path: ../results/config_7/
+pose_path: ../datasets/rgbd_dataset_freiburg2_pioneer_slam3/pose_per_frame/
+trained_models_path: ../trained-models/UfM_FCDenseNet_Ensemble
+trained_model_folder: nyudepthv2.modality=rgb.arch=FCDenseNet.criterion=heteroscedastic.lr=0.001.adjustlr=1.optimizer=SGD.bs=4.pretrained=False.epochs=50.dropoutP=0.bootstrap=False.ensemble= # without ensemble member number, added in utils
+best_model_name: checkpoint-50.pth.tar
+# mode 
+method: 
+- aleatoric
+- ensemble
+- ensemble_UfM
+- aleatoric_UfM
+- full_ensemble_UfM
+# - MCDropout # needs p > 0
+# - MCDropout_UfM # needs p > 0
+# - full_MCDropout_UfM # needs p > 0
+evaluate: True
+loss: heteroscedastic
+ensemble_size: 10
+p: 0 # dropout probability 
+num_inferences: 1 
+input_height: 224
+input_width: 224 
+# TUM Freiburg 2 camera calibration
+fx: 182.315  # 520.9/640*224
+fy: 243.13333334  # 521.0/480*224
+cx: 113.785 #  325.1/640*224
+cy: 116.52666667 # 249.7/480*224
+max_cloud_size: 100000
+# hardware parameters
+device: GPU
+num_cores: 1
+workers: 10
+# printing/saving parameters
+print_freq: 100
+store_freq: 100
+max_frames_to_save: 10000000000000000 # no max 
