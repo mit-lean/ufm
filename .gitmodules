@@ -1,0 +1,3 @@
+[submodule "libs/uncertainty_calibration"]
+	path = libs/uncertainty_calibration
+	url = https://github.com/mit-lean/uncertainty_calibration.git
