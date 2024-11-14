@@ -318,7 +318,7 @@ class UncertaintyFromMotion:
             partial_covariance_2 = partial_covariance_2_1 + partial_covariance_2_2
             partial_covariance_2_vec = self.compress_symmetric_matrix(partial_covariance_2, num_of_points=num_pts_updating)
             ## add partial covariance terms up
-            valid_covar_cloud = torch.squeeze(partial_covariance_1) + partial_covariance_2_vec
+            valid_covar_cloud = torch.squeeze(partial_covariance_1, dim=2) + partial_covariance_2_vec
             # for determistic case, numerical errors for very small negative values; only replacing those with 0 
             numerical_errors = torch.logical_and((valid_covar_cloud < 0), (valid_covar_cloud > -1e5))
             valid_covar_cloud[numerical_errors] = 0 # replace numerical error with 0
